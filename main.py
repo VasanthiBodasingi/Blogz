@@ -11,14 +11,18 @@ class BlogHandler(webapp2.RequestHandler):
 
     def get_posts(self, limit, offset):
         """ Get all posts ordered by creation date (descending) """
-        q = Post.all().order('-created')
-        return q.fetch(limit=limit, offset=offset)
+        query = Post.all().order('-created')
+        return query.fetch(limit=limit, offset=offset)
 
     def get_posts_by_user(self, user, limit, offset):
-        """ Get all posts by a specific user, ordered by creation date (descending) """
-        q = Post.all()
-        q.filter("author", user).order('-created')
-        return q.fetch(limit=limit, offset=offset)
+        """
+            Get all posts by a specific user, ordered by creation date (descending).
+            The user parameter will be a User object.
+        """
+
+        # TODO - filter the query so that only posts by the given user
+
+        return None
 
     def get_user_by_name(self, username):
         """ Get a user object from the db, based on their username """
@@ -254,6 +258,8 @@ class SignupHandler(BlogHandler):
 
 class LoginHandler(BlogHandler):
 
+    # TODO - The login code here is mostly set up for you, but there isn't a template to log in
+
     def render_login_form(self, error=""):
         """ Render the login form with or without an error, based on parameters """
         t = jinja_env.get_template("login.html")
@@ -290,9 +296,7 @@ app = webapp2.WSGIApplication([
     ('/blog/newpost', NewPostHandler),
     webapp2.Route('/blog/<id:\d+>', ViewPostHandler),
     webapp2.Route('/blog/<username:[a-zA-Z0-9_-]{3,20}>', BlogIndexHandler),
-    ('/signup', SignupHandler),
-    ('/login', LoginHandler),
-    ('/logout', LogoutHandler)
+    ('/signup', SignupHandler)
 ], debug=True)
 
 # A list of paths that a user must be logged in to access
