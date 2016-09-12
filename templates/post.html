@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2 class="post-title">{{ post.title }}</h2>
+<p class="post-body">{{ post.body }}</p>
+<p class="post-author">
+    written by <a href="/blog/{{ post.author.username }}">{{ post.author.username }}</a> on {{ post.created.strftime('%Y-%m-%d') }}
+</p>
+
+{% endblock %}

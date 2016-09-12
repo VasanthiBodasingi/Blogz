@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>blog posts!</h1>
+
+{% for post in posts %}
+
+<h2><a href="/blog/{{ post.key().id() }}">{{ post.title }}</a></h2>
+<p>{{ post.body }}</p>
+<p class="post-author">written by <a href="/blog/{{ post.author.username }}">{{ post.author.username }}</a></p>
+
+{% endfor %}
+
+{% if prev_page %}
+<a href="/blog?page={{ prev_page }}">&lt; prev</a>
+{% endif %}
+
+{% if prev_page and next_page %}
+&nbsp;&nbsp; | &nbsp;&nbsp;
+{% endif %}
+
+{% if next_page %}
+<a href="/blog?page={{ next_page }}">next &gt;</a>
+{% endif %}
+
+{% endblock %}
