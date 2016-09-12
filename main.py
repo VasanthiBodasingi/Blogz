@@ -21,7 +21,6 @@ class BlogHandler(webapp2.RequestHandler):
         """
 
         # TODO - filter the query so that only posts by the given user
-
         return None
 
     def get_user_by_name(self, username):
@@ -296,7 +295,9 @@ app = webapp2.WSGIApplication([
     ('/blog/newpost', NewPostHandler),
     webapp2.Route('/blog/<id:\d+>', ViewPostHandler),
     webapp2.Route('/blog/<username:[a-zA-Z0-9_-]{3,20}>', BlogIndexHandler),
-    ('/signup', SignupHandler)
+    ('/signup', SignupHandler),
+    ('/login', LoginHandler),
+    ('/logout', LogoutHandler)
 ], debug=True)
 
 # A list of paths that a user must be logged in to access
