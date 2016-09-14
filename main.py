@@ -111,7 +111,8 @@ class BlogIndexHandler(BlogHandler):
                     page=page,
                     page_size=self.page_size,
                     prev_page=prev_page,
-                    next_page=next_page)
+                    next_page=next_page,
+                    username=username)
         self.response.out.write(response)
 
 class NewPostHandler(BlogHandler):

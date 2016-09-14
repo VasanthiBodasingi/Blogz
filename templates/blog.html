@@ -12,16 +12,32 @@
 
 {% endfor %}
 
-{% if prev_page %}
-<a href="/blog?page={{ prev_page }}">&lt; prev</a>
+{% if username %}
+    {% if prev_page %}
+    <a href="/blog/{{ username }}?page={{ prev_page }}">&lt; prev</a>
+    {% endif %}
+
+    {% if prev_page and next_page %}
+    &nbsp;&nbsp; | &nbsp;&nbsp;
+    {% endif %}
+
+    {% if next_page %}
+    <a href="/blog/{{ username }}?page={{ next_page }}">next &gt;</a>
+    {% endif %}
 {% endif %}
 
-{% if prev_page and next_page %}
-&nbsp;&nbsp; | &nbsp;&nbsp;
-{% endif %}
+{% if not username %}
+    {% if prev_page %}
+    <a href="/blog?page={{ prev_page }}">&lt; prev</a>
+    {% endif %}
 
-{% if next_page %}
-<a href="/blog?page={{ next_page }}">next &gt;</a>
+    {% if prev_page and next_page %}
+    &nbsp;&nbsp; | &nbsp;&nbsp;
+    {% endif %}
+
+    {% if next_page %}
+    <a href="/blog?page={{ next_page }}">next &gt;</a>
+    {% endif %}
 {% endif %}
 
 {% endblock %}
